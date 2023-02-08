@@ -1,5 +1,5 @@
 /*
-	Fractal by HTML5 UP
+	Telephasic by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
@@ -11,12 +11,11 @@
 
 	// Breakpoints.
 		breakpoints({
-			xlarge:   [ '1281px',  '1680px' ],
-			large:    [ '981px',   '1280px' ],
-			medium:   [ '737px',   '980px'  ],
-			small:    [ '481px',   '736px'  ],
-			xsmall:   [ '361px',   '480px'  ],
-			xxsmall:  [ null,      '360px'  ]
+			normal:    [ '1081px',  '1280px'  ],
+			narrow:    [ '821px',   '1080px'  ],
+			narrower:  [ '737px',   '820px'   ],
+			mobile:    [ '481px',   '736px'   ],
+			mobilep:   [ null,      '480px'   ]
 		});
 
 	// Play initial animations on page load.
@@ -26,25 +25,42 @@
 			}, 100);
 		});
 
-	// Mobile?
-		if (browser.mobile)
-			$body.addClass('is-mobile');
-		else {
+	// Dropdowns.
+		$('#nav > ul').dropotron({
+			mode: 'fade',
+			speed: 300,
+			alignment: 'center',
+			noOpenerFade: true
+		});
 
-			breakpoints.on('>medium', function() {
-				$body.removeClass('is-mobile');
-			});
+	// Nav.
 
-			breakpoints.on('<=medium', function() {
-				$body.addClass('is-mobile');
-			});
+		// Button.
+			$(
+				'<div id="navButton">' +
+					'<a href="#navPanel" class="toggle"></a>' +
+				'</div>'
+			)
+				.appendTo($body);
 
-		}
-
-	// Scrolly.
-		$('.scrolly')
-			.scrolly({
-				speed: 1500
-			});
+		// Panel.
+			$(
+				'<div id="navPanel">' +
+					'<nav>' +
+						'<a href="index.html" class="link depth-0">Home</a>' +
+						$('#nav').navList() +
+					'</nav>' +
+				'</div>'
+			)
+				.appendTo($body)
+				.panel({
+					delay: 500,
+					hideOnClick: true,
+					resetScroll: true,
+					resetForms: true,
+					side: 'top',
+					target: $body,
+					visibleClass: 'navPanel-visible'
+				});
 
 })(jQuery);
